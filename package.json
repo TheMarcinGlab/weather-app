@@ -1,0 +1,22 @@
+{
+  "name": "weather",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "body-parser": "^1.20.3",
+    "cookie-parser": "~1.4.3",
+    "cross-spawn": "^7.0.5", 
+    "debug": "^4.3.4",
+    "ejs": "^3.1.7",
+    "express": "^4.18.4",
+    "json-schema": "^0.4.0",
+    "lodash": "^4.17.21",
+    "mime": "^1.4.1",
+    "morgan": "^1.9.1",
+    "serve-favicon": "~2.4.5"
+  }
+}
