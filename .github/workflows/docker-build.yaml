@@ -30,7 +30,7 @@ jobs:
           platforms: linux/amd64
           push: false
           load: true
-          no-cache: true              # wymusza pełną przebudowę obrazu bez użycia cache
+          no-cache: true
           tags: marcin002/weather-app:${{ github.sha }}
           cache-from: type=registry,ref=marcin002/weather-app:cache
           cache-to: type=registry,ref=marcin002/weather-app:cache,mode=max
@@ -46,6 +46,8 @@ jobs:
           image-ref: marcin002/weather-app:${{ github.sha }}
           format: table
           exit-code: 1
+          vuln-type: os,library
+          ignore-unfixed: false
           severity: CRITICAL,HIGH
 
       - name: Wypycham obraz na DockerHub (jeśli bezpieczny)
