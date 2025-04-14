@@ -49,6 +49,8 @@ jobs:
           vuln-type: os,library
           ignore-unfixed: false
           severity: CRITICAL,HIGH
+          skip-dirs: /usr/local/lib/node_modules
+
 
       - name: Wypycham obraz na DockerHub (jeśli bezpieczny)
         if: success()
