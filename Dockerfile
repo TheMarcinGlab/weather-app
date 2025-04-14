@@ -26,6 +26,9 @@ ENV NODE_ENV=production
 # Tworzenie użytkownika z mniejszymi uprawnieniami niż root ( nie-root )
 RUN addgroup -S MarcinGlab && adduser -S MarcinGlab -G MarcinGlab
 
+# Instalacja curl, który jest wymagany do healthcheck
+RUN apk add --no-cache curl
+
 WORKDIR /app
 
 COPY --from=builder /app /app
@@ -34,7 +37,7 @@ USER MarcinGlab
 
 # Healthcheck do monitorowania działania aplikacji
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/ || exit 1
+  CMD curl --fail --silent http://localhost:3000/ || exit 1
 
 EXPOSE 3000
 CMD ["node", "bin/www"]
