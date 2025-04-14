@@ -23,12 +23,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Buduję obraz kontenera (lokalnie)
+      - name: Buduję obraz kontenera (lokalnie, do Trivy)
         uses: docker/build-push-action@v5
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: false
+          load: true
           tags: marcin002/weather-app:${{ github.sha }}
           cache-from: type=registry,ref=marcin002/weather-app:cache
           cache-to: type=registry,ref=marcin002/weather-app:cache,mode=max
@@ -46,7 +47,7 @@ jobs:
           exit-code: 1
           severity: CRITICAL,HIGH
 
-      - name: Wypycham obraz na DockerHub (tylko jeśli bezpieczny)
+      - name: Wypycham obraz na DockerHub (jeśli bezpieczny)
         if: success()
         uses: docker/build-push-action@v5
         with:
