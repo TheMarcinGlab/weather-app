@@ -30,6 +30,7 @@ jobs:
           platforms: linux/amd64
           push: false
           load: true
+          no-cache: true              # wymusza pełną przebudowę obrazu bez użycia cache
           tags: marcin002/weather-app:${{ github.sha }}
           cache-from: type=registry,ref=marcin002/weather-app:cache
           cache-to: type=registry,ref=marcin002/weather-app:cache,mode=max
